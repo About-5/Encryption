@@ -11,19 +11,14 @@ namespace TestingCS
             StringBuilder cipherText = new StringBuilder("", plainText.Length);
             plainText = plainText.ToUpper();
 
-            for (int i = 0; i < plainText.Length; i++)
-            {
+            for (int i = 0; i < plainText.Length; i++) {
                 int ascii = (int)plainText[i] + shift;
-                if (ascii < 65)
-                {
+                if (ascii < 65) {
                     cipherText.Insert(i, plainText[i]);
-                }
-                else if (ascii < 91)
-                {
+                } else if (ascii < 91) {
                     cipherText.Insert(i, (char)ascii);
                 }
-                else
-                {
+                else {
                     ascii = ascii - 26;
                     cipherText.Insert(i, (char)ascii);
                 }
@@ -37,20 +32,14 @@ namespace TestingCS
             StringBuilder plainText = new StringBuilder("", cipherText.Length);
             cipherText = cipherText.ToUpper();
 
-            for (int i = 0; i < cipherText.Length; i++)
-            {
+            for (int i = 0; i < cipherText.Length; i++) {
                 int ascii = (int)cipherText[i] - shift;
-                if (ascii < 60)
-                {
+                if (ascii < 60) {
                     plainText.Insert(i, cipherText[i]);
                     
-                }
-                else if (ascii > 64)
-                {
+                } else if (ascii > 64) {
                     plainText.Insert(i, (char)ascii);
-                }
-                else
-                {
+                } else {
                     ascii = ascii + 26;
                     plainText.Insert(i, (char)ascii);
                 }
@@ -93,29 +82,28 @@ namespace TestingCS
             StringBuilder plainText = new StringBuilder("", cipherText.Length);
             cipherText = cipherText.ToUpper();
             code = code.ToUpper();
-            Dictionary<int, int> list = new Dictionary<int, int>();
+            Dictionary<int, int> list = new Dictionary<int, int>()
+            {
+                {32, -33}
+            };
             for(int i = 0; i < code.Length; i++) {
                 list.Add(code[i], i);
             } 
 
-            if(code.Length != 26)
-            {
+            if(code.Length != 26) {
                 Console.WriteLine("Bad decoding string \n");
                 return null;
             }
 
-            for(int i = 0; i < cipherText.Length; i++)
-            {
+            for(int i = 0; i < cipherText.Length; i++) {
                 plainText.Insert(i, (char)(list[cipherText[i]] + 65));
-                
             }
 
             return plainText.ToString();    
         }
 
-        public static void Main(string[] args)
-        {
-            string plainText = "animal";
+        public static void Main(string[] args) {
+            string plainText = "How is your day today";
             Encryption encrypt = new Encryption();
             int caeserShift = 5;
             string cipherText = encrypt.encryptCaeser(plainText, caeserShift);
